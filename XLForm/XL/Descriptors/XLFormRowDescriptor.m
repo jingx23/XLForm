@@ -66,6 +66,7 @@
 @synthesize cellConfig = _cellConfig;
 @synthesize cellConfigIfDisabled = _cellConfigIfDisabled;
 @synthesize cellConfigAtConfigure = _cellConfigAtConfigure;
+@synthesize cellConfigForSelector = _cellConfigForSelector;
 
 -(instancetype)init
 {
@@ -87,6 +88,7 @@
         _cellConfig = [NSMutableDictionary dictionary];
         _cellConfigIfDisabled = [NSMutableDictionary dictionary];
         _cellConfigAtConfigure = [NSMutableDictionary dictionary];
+        _cellConfigForSelector = [NSMutableDictionary dictionary];
         _isDirtyDisablePredicateCache = YES;
         _disablePredicateCache = nil;
         _isDirtyHidePredicateCache = YES;
@@ -157,6 +159,14 @@
     return _cellConfig;
 }
 
+-(NSMutableDictionary *)cellConfigForSelector
+{
+    if (_cellConfigForSelector) return _cellConfigForSelector;
+    _cellConfigForSelector = [NSMutableDictionary dictionary];
+    return _cellConfigForSelector;
+}
+
+
 -(NSMutableDictionary *)cellConfigIfDisabled
 {
     if (_cellConfigIfDisabled) return _cellConfigIfDisabled;
@@ -196,6 +206,7 @@
     rowDescriptorCopy.cellClass = [self.cellClass copy];
     [rowDescriptorCopy.cellConfig addEntriesFromDictionary:self.cellConfig];
     [rowDescriptorCopy.cellConfigAtConfigure addEntriesFromDictionary:self.cellConfigAtConfigure];
+    [rowDescriptorCopy.cellConfigForSelector addEntriesFromDictionary:self.cellConfigForSelector];
     rowDescriptorCopy.valueTransformer = [self.valueTransformer copy];
     rowDescriptorCopy->_hidden = _hidden;
     rowDescriptorCopy->_disabled = _disabled;
